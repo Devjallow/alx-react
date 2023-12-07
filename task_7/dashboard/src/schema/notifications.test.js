@@ -1,8 +1,8 @@
-import { getAllNotificationsByUser, normalized } from './notifications';
+import { getAllNotificationsByUser, normalizedData } from './notifications';
 
-describe('notifications', () => {
-  it('read data from a json', () => {
-    const data = [
+describe('Test for Notifications.js', () => {
+  it('verify that the function returns the correct data', () => {
+    const result = [
         {
           guid: '2d8e40be-1c78-4de0-afc9-fcc147afd4d2',
           isRead: true,
@@ -18,9 +18,9 @@ describe('notifications', () => {
             'Non diam phasellus vestibulum lorem sed risus ultricies. Tellus mauris a diam maecenas sed',
         },
       ],
-      allContext = getAllNotificationsByUser('5debd764a7c57c7839d722e9');
+      context = getAllNotificationsByUser('5debd764a7c57c7839d722e9');
 
-    expect(allContext).toEqual(expect.arrayContaining(data));
+    expect(context).toEqual(expect.arrayContaining(result));
   });
 
   it('normalized - result', () => {
@@ -41,12 +41,12 @@ describe('notifications', () => {
       '5debd764de9fa684468cdc0b',
     ];
 
-    const result = normalized.result;
+    const result = normalizedData.result;
 
     expect(result).toEqual(expect.arrayContaining(data));
   });
 
-  it('normalized - users', () => {
+  it('normalizedData - users', () => {
     const data = {
       age: 25,
       email: 'poole.sanders@holberton.nz',
@@ -55,12 +55,12 @@ describe('notifications', () => {
       picture: 'http://placehold.it/32x32',
     };
 
-    const user = normalized.entities.users['5debd764a7c57c7839d722e9'];
+    const user = normalizedData.entities.users['5debd764a7c57c7839d722e9'];
 
     expect(user).toEqual(data);
   });
 
-  it('normalized - messages', () => {
+  it('normalizedData - messages', () => {
     const data = {
       guid: 'efb6c485-00f7-4fdf-97cc-5e12d14d6c41',
       isRead: false,
@@ -69,12 +69,12 @@ describe('notifications', () => {
     };
 
     const message =
-      normalized.entities.messages['efb6c485-00f7-4fdf-97cc-5e12d14d6c41'];
+      normalizedData.entities.messages['efb6c485-00f7-4fdf-97cc-5e12d14d6c41'];
 
     expect(message).toEqual(data);
   });
 
-  it('normalized - notifications', () => {
+  it('normalizedData - notifications', () => {
     const data = {
       author: '5debd764f8452ef92346c772',
       context: '3068c575-d619-40af-bf12-dece1ee18dd3',
@@ -82,7 +82,7 @@ describe('notifications', () => {
     };
 
     const notification =
-      normalized.entities.notifications['5debd7642e815cd350407777'];
+      normalizedData.entities.notifications['5debd7642e815cd350407777'];
 
     expect(notification).toEqual(data);
   });
